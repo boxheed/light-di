@@ -9,7 +9,7 @@ jobs:
     # A Docker image with Node.js pre-installed. Using a specific version
     # ensures a consistent and reproducible build environment.
     docker:
-      - image: cimg/node:20.0.0
+      - image: cimg/node:22.19
 
     steps:
       # Step 1: Checkout the code from the repository.
