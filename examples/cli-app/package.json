@@ -1,0 +1,19 @@
+{
+  "name": "light-di-cli-example",
+  "version": "1.0.0",
+  "description": "A simple CLI tool demonstrating the use of light-di.",
+  "main": "src/cli.js",
+  "type": "module",
+  "bin": {
+    "greet": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js greet --name=\"World\""
+  },
+  "dependencies": {
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "jest-environment-node": "^30.1.2"
+  }
+}

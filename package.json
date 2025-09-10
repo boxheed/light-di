@@ -1,0 +1,43 @@
+{
+  "name": "light-di",
+  "version": "1.0.0",
+  "description": "A simple, lightweight dependency injection container for JavaScript and TypeScript.",
+  "type": "module",
+  "main": "dist/container.js",
+  "types": "dist/container.d.ts",
+  "scripts": {
+    "build": "babel src --out-dir dist --extensions \".js\" && tsc",
+    "prepublishOnly": "npm run build",
+    "test": "vitest",
+    "example": "node main.js",
+    "lint": "eslint src/",
+    "format": "prettier --write ."
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "dependency-injection",
+    "di",
+    "inversion-of-control",
+    "ioc",
+    "javascript",
+    "typescript",
+    "lightweight"
+  ],
+  "author": "Andrew Dunn",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  }
+}

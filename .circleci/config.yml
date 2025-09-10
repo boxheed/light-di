@@ -1,0 +1,53 @@
+# CircleCI 2.1 configuration file for the simple-di project.
+# This pipeline will automatically build and test the library on every commit.
+# It uses a modern Node.js environment and caches dependencies to speed up subsequent builds.
+
+version: 2.1
+
+jobs:
+  build_and_test:
+    # A Docker image with Node.js pre-installed. Using a specific version
+    # ensures a consistent and reproducible build environment.
+    docker:
+      - image: cimg/node:18.16.0
+
+    steps:
+      # Step 1: Checkout the code from the repository.
+      - checkout
+
+      # Step 2: Restore the npm dependencies cache.
+      # This cache key is based on the contents of package-lock.json.
+      # If package-lock.json changes, the cache is invalidated and a new one is created.
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+
+      # Step 3: Install dependencies.
+      # 'npm ci' is used instead of 'npm install' as it's designed for CI environments,
+      # performing a clean install and ensuring dependencies match package-lock.json.
+      - run:
+          name: Install Dependencies
+          command: npm ci
+
+      # Step 4: Save the newly installed dependencies to the cache.
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+      # Step 5: Run the build script to transpile the code.
+      # This step ensures that the distributable files are correctly generated.
+      - run:
+          name: Build Project
+          command: npm run build
+
+      # Step 6: Run the tests to verify the library's functionality.
+      # This command executes the simple test file created earlier.
+      - run:
+          name: Run Tests
+          command: npm run test
+
+workflows:
+  version: 2
+  build-test-flow:
+    jobs:
+      - build_and_test

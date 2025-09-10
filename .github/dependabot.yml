@@ -1,0 +1,23 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Enable npm updates for your project's development dependencies.
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      # Check for new versions every week.
+      interval: 'weekly'
+    # Create pull requests to update both regular and dev dependencies.
+    target-branch: 'main'
+    # Specify which dependencies to update.
+    # We only have devDependencies, but this is a good practice.
+    ignore:
+      - dependency-name: '*'
+        versions: ['< 2.0.0'] # Example: Ignore major version updates for now
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
