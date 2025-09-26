@@ -1,10 +1,8 @@
-// A simple, pure JavaScript dependency injection container.
-// It uses JSDoc comments to provide TypeScript type information
-// without requiring any external dependencies or experimental features.
+// A simple, pure JavaScript dependency injection container with async/await support.
 
 /**
  * @template T
- * @typedef {{ new (...args: any[]): T } | ((...args: any[]) => T)} DependencyFactory
+ * @typedef {{ new (...args: any[]): T } | ((...args: any[]) => T | Promise<T>)} DependencyFactory
  */
 
 /**
@@ -58,9 +56,9 @@ export class Container {
    * Resolves and returns an instance of the service.
    * @template T
    * @param {any} identifier - The identifier of the service to resolve.
-   * @returns {T} - The resolved instance.
+   * @returns {Promise<T>} - A promise that resolves to the resolved instance.
    */
-  resolve(identifier) {
+  async resolve(identifier) {
     const recipe = this.#recipes.get(identifier);
     if (!recipe) {
       throw new Error(
@@ -74,7 +72,9 @@ export class Container {
     }
 
     // Recursively resolve all dependencies
-    const resolvedDeps = recipe.dependencies.map((dep) => this.resolve(dep));
+    const resolvedDeps = await Promise.all(
+      recipe.dependencies.map((dep) => this.resolve(dep))
+    );
 
     let instance;
     try {
@@ -86,7 +86,7 @@ export class Container {
       if (isClass) {
         instance = new recipe.factory(...resolvedDeps);
       } else {
-        instance = recipe.factory(...resolvedDeps);
+        instance = await recipe.factory(...resolvedDeps);
       }
     } catch (error) {
       throw new Error(
