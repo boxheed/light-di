@@ -25,7 +25,7 @@ npm install
 3. Run the CLI tool using `npx`.
 
 ```bash
-npx greet --name="CLI User"
+npx greeter greet "CLI User"
 # Expected output: Hello, CLI User!
 ```
 

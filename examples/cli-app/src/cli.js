@@ -18,10 +18,9 @@ yargs(hideBin(process.argv))
         type: 'string',
       });
     },
-    (argv) => {
+    async (argv) => {
       // Resolve the GreetingService from our DI container.
-      const greetingService = container.resolve(GreetingService);
-
+      const greetingService = await container.resolve(GreetingService);
       // Use the injected service to execute the command logic.
       greetingService.sayHello(argv.name);
     }
