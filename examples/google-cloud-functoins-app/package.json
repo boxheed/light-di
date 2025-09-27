@@ -1,0 +1,14 @@
+{
+    "name": "light-di-google-cloud-function-example",
+    "version": "1.0.0",
+    "description": "A Google Cloud Functions example using the light-di container.",
+    "main": "index.js",
+    "scripts": {
+      "start": "functions-framework --target=userFunction --port=8080 --source=src/index.js"
+    },
+    "dependencies": {
+      "@google-cloud/functions-framework": "^3.0.0"
+    },
+    "type": "module"
+  }
+  
