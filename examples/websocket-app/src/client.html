@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: Inter, sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">light-di WebSocket Demo</h1>
+        <div id="messages" class="bg-gray-200 h-64 overflow-y-auto p-4 rounded-md mb-4 flex flex-col-reverse">
+            <!-- Messages will be appended here -->
+        </div>
+        <div class="flex space-x-2">
+            <input type="text" id="messageInput" placeholder="Type a message..." class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="sendButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition-colors duration-200">
+                Send
+            </button>
+        </div>
+        <p id="status" class="mt-4 text-center text-sm text-gray-500">Connecting...</p>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8080');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const messagesDiv = document.getElementById('messages');
+        const statusText = document.getElementById('status');
+
+        ws.onopen = () => {
+            statusText.textContent = 'Connected!';
+            statusText.classList.remove('text-gray-500');
+            statusText.classList.add('text-green-600');
+        };
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === 'message') {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('mb-2', 'p-2', 'bg-blue-100', 'rounded-md', 'break-words');
+                messageElement.textContent = data.content;
+                messagesDiv.prepend(messageElement);
+            }
+        };
+
+        ws.onclose = () => {
+            statusText.textContent = 'Disconnected.';
+            statusText.classList.remove('text-green-600');
+            statusText.classList.add('text-red-600');
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket Error: ', error);
+            statusText.textContent = 'Connection Error.';
+            statusText.classList.remove('text-green-600');
+            statusText.classList.add('text-red-600');
+        };
+
+        sendButton.onclick = () => {
+            const message = messageInput.value;
+            if (message) {
+                ws.send(message);
+                messageInput.value = '';
+            }
+        };
+
+        messageInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
