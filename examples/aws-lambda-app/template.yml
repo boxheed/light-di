@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: light-di AWS Lambda Example
+
+# Defines the function resource
+Resources:
+  UserApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Specifies the handler function (index.js exports handler)
+      Handler: ./src/index.handler
+      # Uses the Node.js 20 runtime (adjust as needed)
+      Runtime: nodejs20.x
+      CodeUri: . # The code is in the current directory
+      MemorySize: 128
+      Timeout: 10
+      Events:
+        # Defines the HTTP trigger path for local and deployed use
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users/{id}
+            Method: GET
