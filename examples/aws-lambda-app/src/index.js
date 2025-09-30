@@ -1,52 +1,57 @@
 // index.js
-// The main AWS Lambda handler file.
 
-// We are using a local path here for the light-di library. In a real project,
-// you would use 'import { container } from "light-di";'
-import { Container } from '../../src/container.js';
-import { UserService, LoggerService } from './services/UserService.js';
+// In a real project, you would import 'light-di' from npm.
+import { Container } from '../../../src/container.js';
+import { DatabaseService } from './services/DatabaseService.js';
+import { UserService } from './services/UserService.js';
 
-// --- Global Scope (Runs on Cold Start) ---
-// This is where we set up the dependency injection container.
-// This code is executed only once when the Lambda container is spun up.
+// 1. Create a container instance in the global scope (Cold Start Optimization)
 const container = new Container();
 
-container.register(LoggerService, LoggerService, [], 'singleton');
-container.register(UserService, UserService, [LoggerService], 'transient');
+// 2. Register Services
+// Register DatabaseService as a singleton using its async factory. 
+// light-di will ensure this setup runs only once during the first invocation.
+container.register(DatabaseService, DatabaseService.create, [], 'singleton');
+
+// Register UserService. It depends on the DatabaseService.
+container.register(UserService, UserService, [DatabaseService], 'transient');
 
 /**
- * Main Lambda handler function.
- * @param {Object} event The API Gateway event.
- * @returns {Promise<Object>} The HTTP response.
+ * AWS Lambda Handler for API Gateway events.
+ * @param {object} event - The API Gateway event object.
+ * @returns {Promise<object>} The HTTP response object.
  */
-export const handler = async (event) => {
-  // --- Execution Scope (Runs on every invocation) ---
-  // We resolve the services we need for this specific invocation.
-  // The container is already configured from the global scope.
-  const userService = container.resolve(UserService);
+export async function handler(event) {
+  // Log the execution start time to demonstrate cold start performance
+  console.log(`[HANDLER] Invocation start at ${new Date().toISOString()}`);
 
   try {
-    // Extract the user ID from the path parameters
-    const userId = event.pathParameters?.id;
-    if (!userId) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ message: 'User ID is required' })
-      };
-    }
+    // 3. Resolve the service using 'await container.resolve()'.
+    // During a COLD START, this will pause and wait for DatabaseService.create() (1s delay)
+    // to complete. On a WARM START, it resolves instantly.
+    const userService = await container.resolve(UserService);
+    
+    // Parse the user ID from the path parameters
+    const userId = event.pathParameters?.id || 'default';
 
-    const user = await userService.getUser(userId);
+    // Execute business logic
+    const userData = userService.getUserData(userId);
 
+    // Return successful response
     return {
       statusCode: 200,
-      body: JSON.stringify(user),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'User data fetched via injected service.',
+        data: userData,
+      }),
     };
   } catch (error) {
-    console.error('Error processing request:', error);
+    console.error('[HANDLER ERROR]', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: 'Internal server error' })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Internal Server Error', details: error.message }),
     };
   }
-};
+}

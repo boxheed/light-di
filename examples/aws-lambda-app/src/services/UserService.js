@@ -1,30 +1,26 @@
 // services/UserService.js
-// This service simulates fetching user data from a database or API.
 
+import { DatabaseService } from './DatabaseService.js';
+
+/**
+ * Handles user-related business logic.
+ * It depends on the DatabaseService for data access.
+ */
 export class UserService {
-    constructor(loggerService) {
-      this.logger = loggerService;
-    }
-  
-    async getUser(id) {
-      this.logger.log(`Fetching user with ID: ${id}`);
-      
-      // Simulate an async operation like a database query
-      await new Promise(resolve => setTimeout(resolve, 100));
-  
-      // Return mock data
-      return {
-        id: id,
-        name: `LambdaUser_${id}`,
-        email: `user_${id}@example.com`
-      };
-    }
+  /**
+   * @param {DatabaseService} databaseService
+   */
+  constructor(databaseService) {
+    this.db = databaseService;
+    console.log(`UserService: Initialized with DB status: ${this.db.getConnectionStatus()}`);
   }
-  
-  export class LoggerService {
-    log(message) {
-      // In a real Lambda, this would write to CloudWatch Logs
-      console.log(`[Lambda Logger]: ${message}`);
-    }
+
+  /**
+   * Retrieves user data by delegating to the database service.
+   * @param {string} id
+   * @returns {object}
+   */
+  getUserData(id) {
+    return this.db.fetchUser(id);
   }
-  
+}
