@@ -1,0 +1,18 @@
+{
+  "name": "light-di-cloudflare-worker-example",
+  "version": "1.0.0",
+  "description": "An example of a Cloudflare Worker using light-di for dependency management.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "light-di": "file:../../../../" 
+    
+    // NOTE: In a real project, replace "file:../../../../" with the package name: "light-di": "^x.x.x"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
