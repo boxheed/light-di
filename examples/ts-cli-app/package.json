@@ -1,0 +1,22 @@
+{
+    "name": "light-di-ts-cli-example",
+    "version": "1.0.0",
+    "description": "A Command-Line Interface example using light-di and TypeScript.",
+    "main": "dist/cli.js",
+    "type": "module",
+    "scripts": {
+      "build": "tsc",
+      "start": "npm run build && node dist/cli.js",
+      "greet": "npm run build && node dist/cli.js --name=\"TypeScript User\""
+    },
+    "dependencies": {
+      "commander": "^12.0.0",
+      "light-di": "file:../../../../"
+    },
+    "devDependencies": {
+      "@types/commander": "^2.12.2",
+      "@types/node": "^20.11.24",
+      "typescript": "^5.3.3"
+    }
+  }
+  
