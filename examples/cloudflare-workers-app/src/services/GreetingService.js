@@ -21,7 +21,7 @@ export class GreetingService {
    */
   getGreeting(name) {
     const dbInfo = this.db.fetchMessage();
-    
+
     return {
       greeting: `Welcome, ${name}!`,
       message: dbInfo.data,

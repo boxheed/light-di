@@ -8,9 +8,7 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "light-di": "file:../../../../" 
-    
-    // NOTE: In a real project, replace "file:../../../../" with the package name: "light-di": "^x.x.x"
+    "light-di": "file:../../../../"
   },
   "devDependencies": {
     "wrangler": "^3.0.0"

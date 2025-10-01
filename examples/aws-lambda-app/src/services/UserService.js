@@ -12,7 +12,9 @@ export class UserService {
    */
   constructor(databaseService) {
     this.db = databaseService;
-    console.log(`UserService: Initialized with DB status: ${this.db.getConnectionStatus()}`);
+    console.log(
+      `UserService: Initialized with DB status: ${this.db.getConnectionStatus()}`
+    );
   }
 
   /**

@@ -15,7 +15,11 @@ export const useService = (ServiceClass) => {
   // Look up the resolved service instance by its class/identifier
   const serviceInstance = services.get(ServiceClass);
   if (!serviceInstance) {
-    throw new Error(`Service ${ServiceClass.name || String(ServiceClass)} was not resolved by the provider.`);
+    throw new Error(
+      `Service ${
+        ServiceClass.name || String(ServiceClass)
+      } was not resolved by the provider.`
+    );
   }
   return serviceInstance;
 };
@@ -41,8 +45,8 @@ export const DIProvider = ({ children }) => {
         setResolvedServices(resolvedMap);
         setLoading(false);
       } catch (err) {
-        console.error("Dependency Injection Initialization Error:", err);
-        setError("Failed to initialize required services.");
+        console.error('Dependency Injection Initialization Error:', err);
+        setError('Failed to initialize required services.');
         setLoading(false);
       }
     };

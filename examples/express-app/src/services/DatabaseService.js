@@ -15,7 +15,7 @@ export class DatabaseService {
   static async create() {
     console.log('DatabaseService: Attempting to connect to database...');
     // Simulate an async network connection delay (e.g., waiting for a DB handshake)
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log('DatabaseService: Connection successful.');
 
     const instance = new DatabaseService();
@@ -37,7 +37,7 @@ export class DatabaseService {
       id: id,
       name: `Injected User ${id}`,
       status: 'Active',
-      dbStatus: this.#connectionStatus
+      dbStatus: this.#connectionStatus,
     };
   }
 }

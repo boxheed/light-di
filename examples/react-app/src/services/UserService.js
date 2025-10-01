@@ -7,7 +7,7 @@ export class UserService {
   static async create() {
     console.log('UserService: Starting async initialization...');
     // Simulate API call or database connection setup time
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     console.log('UserService: Initialization complete.');
 
     const instance = new UserService();

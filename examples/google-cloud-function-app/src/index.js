@@ -28,10 +28,10 @@ const userFunction = async (req, res) => {
   // doesn't actually need it for this simple example. We will create a
   // simple logger instance for this request.
   const logger = new LoggerService(null);
-  
+
   // Resolve the UserService from the container.
   const userService = await container.resolve(UserService);
-  
+
   try {
     const userId = req.query.id;
     if (!userId) {

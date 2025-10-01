@@ -20,10 +20,14 @@ const UserList = () => {
             className="p-4 bg-indigo-50 rounded-lg flex justify-between items-center transition duration-300 hover:bg-indigo-100"
           >
             <div>
-              <p className="text-lg font-semibold text-indigo-700">{user.name}</p>
+              <p className="text-lg font-semibold text-indigo-700">
+                {user.name}
+              </p>
               <p className="text-sm text-gray-500">{user.email}</p>
             </div>
-            <span className="text-xs text-indigo-400 font-medium">ID: {user.id}</span>
+            <span className="text-xs text-indigo-400 font-medium">
+              ID: {user.id}
+            </span>
           </li>
         ))}
       </ul>

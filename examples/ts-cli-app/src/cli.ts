@@ -15,14 +15,15 @@ async function runCli() {
       try {
         // Resolve the main service from the container.
         // It brings all necessary dependencies (like the Logger) with it.
-        const greetingService: GreetingService = await container.resolve(GreetingService);
+        const greetingService: GreetingService = await container.resolve(
+          GreetingService
+        );
 
         const greeting = greetingService.generateGreeting(options.name);
         console.log(`\n${greeting}\n`);
-        
       } catch (error: any) {
         console.error('\n--- CLI Error ---');
-        console.error(error?.message? error.message : error);
+        console.error(error?.message ? error.message : error);
         console.error('------------------\n');
         process.exit(1);
       }

@@ -1,14 +1,13 @@
 {
-    "name": "light-di-express-example",
-    "version": "1.0.0",
-    "description": "A simple Express.js application demonstrating the use of light-di.",
-    "main": "app.js",
-    "scripts": {
-      "start": "node ./src/app.js"
-    },
-    "dependencies": {
-      "express": "^4.18.2"
-    },
-    "type": "module"
-  }
-  
+  "name": "light-di-express-example",
+  "version": "1.0.0",
+  "description": "A simple Express.js application demonstrating the use of light-di.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "type": "module"
+}

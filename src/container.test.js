@@ -16,7 +16,9 @@ describe('Container', () => {
 
   it('should resolve a service registered with an asynchronous factory', async () => {
     container.register('asyncService', async () => {
-      return new Promise((resolve) => setTimeout(() => resolve('Async Hello'), 10));
+      return new Promise((resolve) =>
+        setTimeout(() => resolve('Async Hello'), 10)
+      );
     });
     const result = await container.resolve('asyncService');
     expect(result).toBe('Async Hello');
@@ -24,7 +26,11 @@ describe('Container', () => {
 
   it('should resolve dependencies correctly', async () => {
     container.register('dependency', () => 'I am a dependency');
-    container.register('serviceWithDependency', (dep) => `Service with: ${dep}`, ['dependency']);
+    container.register(
+      'serviceWithDependency',
+      (dep) => `Service with: ${dep}`,
+      ['dependency']
+    );
     const result = await container.resolve('serviceWithDependency');
     expect(result).toBe('Service with: I am a dependency');
   });
@@ -37,7 +43,12 @@ describe('Container', () => {
   });
 
   it('should return a new instance for transient services', async () => {
-    container.register('transientService', () => ({ id: Math.random() }), [], 'transient');
+    container.register(
+      'transientService',
+      () => ({ id: Math.random() }),
+      [],
+      'transient'
+    );
     const instance1 = await container.resolve('transientService');
     const instance2 = await container.resolve('transientService');
     expect(instance1).not.toBe(instance2);
@@ -56,11 +67,11 @@ describe('Container', () => {
     expect(() => container.register('invalidFactory', 'notAFunction')).toThrow(
       'Factory must be a class constructor or a function.'
     );
-    expect(() => container.register('invalidDependencies', () => {}, 'notAnArray')).toThrow(
-      'Dependencies must be an array.'
-    );
-    expect(() => container.register('invalidLifecycle', () => {}, [], 'invalid')).toThrow(
-      'Lifecycle must be either "singleton" or "transient".'
-    );
+    expect(() =>
+      container.register('invalidDependencies', () => {}, 'notAnArray')
+    ).toThrow('Dependencies must be an array.');
+    expect(() =>
+      container.register('invalidLifecycle', () => {}, [], 'invalid')
+    ).toThrow('Lifecycle must be either "singleton" or "transient".');
   });
 });

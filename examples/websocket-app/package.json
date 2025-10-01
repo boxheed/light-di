@@ -1,14 +1,13 @@
 {
-    "name": "light-di-websocket-example",
-    "version": "1.0.0",
-    "description": "A simple WebSocket server demonstrating the use of light-di.",
-    "main": "src/server.js",
-    "scripts": {
-      "start": "node src/server.js"
-    },
-    "dependencies": {
-      "ws": "^8.11.0"
-    },
-    "type": "module"
-  }
-  
+  "name": "light-di-websocket-example",
+  "version": "1.0.0",
+  "description": "A simple WebSocket server demonstrating the use of light-di.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "ws": "^8.11.0"
+  },
+  "type": "module"
+}

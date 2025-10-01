@@ -2,7 +2,10 @@
 // The main entry point for our WebSocket server.
 import { WebSocketServer } from 'ws';
 import container from './container.js';
-import { LoggerService, MessageBroadcastService } from './services/MessageBroadcastService.js';
+import {
+  LoggerService,
+  MessageBroadcastService,
+} from './services/MessageBroadcastService.js';
 
 const port = 8080;
 const wss = new WebSocketServer({ port });

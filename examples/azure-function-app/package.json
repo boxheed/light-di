@@ -1,11 +1,10 @@
 {
-    "name": "light-di-azure-function-example",
-    "version": "1.0.0",
-    "description": "An Azure Functions example using the light-di container.",
-    "scripts": {
-      "start": "func start"
-    },
-    "dependencies": {},
-    "devDependencies": {}
-  }
-  
+  "name": "light-di-azure-function-example",
+  "version": "1.0.0",
+  "description": "An Azure Functions example using the light-di container.",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

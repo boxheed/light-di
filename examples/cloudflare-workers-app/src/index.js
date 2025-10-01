@@ -16,7 +16,7 @@ export default {
 
     try {
       // 1. Resolve the service using 'await container.resolve()'.
-      // During a COLD START (first request), this will pause and wait for the 
+      // During a COLD START (first request), this will pause and wait for the
       // DatabaseService.create() promise (1s delay) to complete.
       // On WARM STARTS, the singleton instance is returned instantly.
       const greetingService = await container.resolve(GreetingService);
@@ -32,13 +32,18 @@ export default {
       return new Response(JSON.stringify(result, null, 2), {
         headers: { 'Content-Type': 'application/json' },
       });
-
     } catch (error) {
       console.error('[HANDLER ERROR]', error);
-      return new Response(JSON.stringify({ error: 'Internal Server Error', details: error.message }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return new Response(
+        JSON.stringify({
+          error: 'Internal Server Error',
+          details: error.message,
+        }),
+        {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
     }
   },
 };

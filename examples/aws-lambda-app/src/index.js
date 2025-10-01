@@ -9,7 +9,7 @@ import { UserService } from './services/UserService.js';
 const container = new Container();
 
 // 2. Register Services
-// Register DatabaseService as a singleton using its async factory. 
+// Register DatabaseService as a singleton using its async factory.
 // light-di will ensure this setup runs only once during the first invocation.
 container.register(DatabaseService, DatabaseService.create, [], 'singleton');
 
@@ -30,7 +30,7 @@ export async function handler(event) {
     // During a COLD START, this will pause and wait for DatabaseService.create() (1s delay)
     // to complete. On a WARM START, it resolves instantly.
     const userService = await container.resolve(UserService);
-    
+
     // Parse the user ID from the path parameters
     const userId = event.pathParameters?.id || 'default';
 
@@ -51,7 +51,10 @@ export async function handler(event) {
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Internal Server Error', details: error.message }),
+      body: JSON.stringify({
+        error: 'Internal Server Error',
+        details: error.message,
+      }),
     };
   }
 }
