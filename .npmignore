@@ -1,0 +1,5 @@
+# Exclude directories
+examples/
+
+# Exclude test files
+*.test.js
