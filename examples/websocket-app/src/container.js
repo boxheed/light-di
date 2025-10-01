@@ -3,7 +3,7 @@
 
 // We are using a local path here for the light-di library. In a real project,
 // you would install it via npm and import it as 'import { Container } from "light-di";'
-import { Container } from '../../../src/container.js';
+import { Container } from '../../../src/light-di.js';
 import {
   LoggerService,
   MessageBroadcastService,

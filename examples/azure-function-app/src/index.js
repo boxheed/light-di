@@ -2,7 +2,7 @@
 
 // This path assumes light-di is installed one directory up, in node_modules,
 // but for this example structure, we reference the root file.
-import { Container } from '../../src/container.js';
+import { Container } from '../../src/light-di.js';
 import { UserService } from '../services/UserService.js';
 import { DatabaseService } from '../services/DatabaseService.js';
 

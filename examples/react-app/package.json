@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple React application demonstrating the use of light-di.",
   "scripts": {
-    "start": "cp ../../src/container.js ./src/light-di.js && react-scripts start"
+    "start": "cp ../../src/light-di.js ./src/light-di.js && react-scripts start"
   },
   "dependencies": {
     "react": "^18.2.0",

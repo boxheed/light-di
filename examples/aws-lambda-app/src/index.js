@@ -1,7 +1,7 @@
 // index.js
 
 // In a real project, you would import 'light-di' from npm.
-import { Container } from '../../../src/container.js';
+import { Container } from '../../../src/light-di.js';
 import { DatabaseService } from './services/DatabaseService.js';
 import { UserService } from './services/UserService.js';
 

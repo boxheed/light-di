@@ -1,5 +1,5 @@
 // container.config.js
-import { Container } from '../../../src/container.js';
+import { Container } from '../../../src/light-di.js';
 import { DatabaseService } from './services/DatabaseService.js';
 import { UserService } from './services/UserService.js';
 
