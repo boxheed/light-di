@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "A simple, lightweight dependency injection container for JavaScript and TypeScript.",
   "type": "module",
-  "main": "dist/container.js",
-  "types": "dist/container.d.ts",
+  "main": "dist/light-di.ts",
+  "types": "dist/light-di.d.ts",
   "scripts": {
     "build": "babel src --out-dir dist --extensions \".js\" && tsc",
     "prepublishOnly": "npm run build",
