@@ -1,6 +1,8 @@
 # light-di Examples
 
-This directory contains a collection of complete, runnable applications that demonstrate how to use l`ight-di` in various environments. Each example is a standalone project with its own `package.json` and a detailed `README.md` file explaining the project's architecture and how to run it.
+This directory contains a collection of complete, runnable applications that demonstrate how to use `light-di` in various environments. Each example is a standalone project with its own `package.json` and a detailed `README.md` file explaining the project's architecture and how to run it.
+
+For more information about the core library, please see the main [`README.md`](../README.md).
 
 ## Table of Contents
 

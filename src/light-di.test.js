@@ -56,22 +56,42 @@ describe('Container', () => {
 
   it('should throw an error for unregistered services', async () => {
     await expect(container.resolve('unregisteredService')).rejects.toThrow(
-      'No service registered for identifier: unregisteredService'
+      'Resolution failed. No service registered for identifier: unregisteredService'
     );
   });
 
   it('should throw an error for invalid registrations', () => {
     expect(() => container.register(123, () => {})).toThrow(
-      'Identifier must be a function, string, or symbol.'
+      'Invalid identifier. Service identifier must be a function, string, or symbol.'
     );
     expect(() => container.register('invalidFactory', 'notAFunction')).toThrow(
-      'Factory must be a class constructor or a function.'
+      "Invalid factory for service 'invalidFactory'. Factory must be a class constructor or a function."
     );
     expect(() =>
       container.register('invalidDependencies', () => {}, 'notAnArray')
-    ).toThrow('Dependencies must be an array.');
+    ).toThrow(
+      "Invalid dependencies for service 'invalidDependencies'. Dependencies must be an array of identifiers."
+    );
     expect(() =>
       container.register('invalidLifecycle', () => {}, [], 'invalid')
-    ).toThrow('Lifecycle must be either "singleton" or "transient".');
+    ).toThrow(
+      "Invalid lifecycle for service 'invalidLifecycle'. Lifecycle must be either \"singleton\" or \"transient\"."
+    );
+  });
+
+  it('should throw an error for self-referencing dependencies', () => {
+    expect(() =>
+      container.register('selfDependent', () => {}, ['selfDependent'])
+    ).toThrow(
+      "Registration failed for service 'selfDependent'. A service cannot have a dependency on itself."
+    );
+  });
+
+  it('should throw an error for circular dependencies', async () => {
+    container.register('serviceA', () => {}, ['serviceB']);
+    container.register('serviceB', () => {}, ['serviceA']);
+    await expect(container.resolve('serviceA')).rejects.toThrow(
+      'Circular dependency detected: serviceA -> serviceB -> serviceA'
+    );
   });
 });
