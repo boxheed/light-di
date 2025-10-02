@@ -22,7 +22,11 @@ git clone https://github.com/your-username/light-di.git
 cd light-di
 ```
 
-3. Install dependencies.npm install
+3. Install dependencies.
+
+```bash
+npm install
+```
 
 ## Development Workflow
 
@@ -36,9 +40,9 @@ npm test
 
 ### Building the Project
 
-To compile the source code and generate the distributable files in the dist/ directory, run the build command.
+To compile the source code and generate the distributable files in the `dist/` directory, run the build command.
 
-```
+```bash
 npm run build
 ```
 
@@ -60,21 +64,21 @@ Follow these steps to submit a pull request:
 
 1. Create a new branch for your changes.
 
-```
+```bash
 git checkout -b feature/my-new-feature
 ```
 
-2. Make your changes, ensuring you follow the project's code style and conventions.
-3. Add tests for your changes. If you are adding a new feature, a new test suite is expected. If you are fixing a bug, a new test that reproduces the bug and then passes after your fix is required.
-4. Commit your changes with a descriptive commit message.
-5. Push your branch to your forked repository.
+2.  Make your changes, ensuring you follow the project's code style and conventions.
+3.  Add tests for your changes. If you are adding a new feature, a new test suite is expected. If you are fixing a bug, a new test that reproduces the bug and then passes after your fix is required.
+4.  Commit your changes with a descriptive commit message.
+5.  Push your branch to your forked repository.
 
-```
+```bash
 git push origin feature/my-new-feature
 ```
 
-6. Open a Pull Request from your branch to the `develop` branch of the original repository.
-   - In your PR description, please provide a clear and concise summary of your changes.
-   - If your PR is related to an existing issue, link to it in the description (e.g., `Closes #123`).
+6.  Open a Pull Request from your branch to the `main` branch of the original repository.
+    - In your PR description, please provide a clear and concise summary of your changes.
+    - If your PR is related to an existing issue, link to it in the description (e.g., `Closes #123`).
 
 Thank you for your help in making this project better!

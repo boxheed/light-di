@@ -17,12 +17,24 @@ npm install light-di
 
 ## Quick Start
 
-```JavaScript
-// A service with a dependency
-class DatabaseService { /* ... */ }
+The following example demonstrates how to register and resolve services with `light-di`.
+
+```javascript
+// Define your services
+class DatabaseService {
+  getUsers() {
+    return [{ id: 1, name: 'John Doe' }];
+  }
+}
+
 class UserService {
   constructor(databaseService) {
     this.databaseService = databaseService;
+  }
+
+  async findUsers() {
+    // In a real app, this would be an async database call
+    return this.databaseService.getUsers();
   }
 }
 
@@ -30,18 +42,25 @@ class UserService {
 import { Container } from 'light-di';
 const container = new Container();
 
+// Register the services
 container.register('DatabaseService', DatabaseService, [], 'singleton');
 container.register('UserService', UserService, ['DatabaseService']);
 
-// Resolve the service
-const userService = container.resolve('UserService');
+// Resolve the service and use it
+async function main() {
+  const userService = await container.resolve('UserService');
+  const users = await userService.findUsers();
+  console.log(users); // Output: [{ id: 1, name: 'John Doe' }]
+}
+
+main();
 ```
 
 ## Examples
 
-To see `light-di` in action across various environments and frameworks, check out the dedicated examples directory. Each example is a complete, runnable project with its own detailed `README.md` file.
+To see `light-di` in action across various environments and frameworks, check out the dedicated [examples directory](https://github.com/vytal-io/light-di/tree/main/examples). Each example is a complete, runnable project with its own detailed `README.md` file.
 
-- Explore the Examples »
+- [Explore the Examples »](https://github.com/vytal-io/light-di/tree/main/examples)
 
 ## Contributing
 
