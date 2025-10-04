@@ -8,7 +8,7 @@ export default {
       { text: 'Examples', link: '/examples' },
       { text: 'Contributing', link: '/contributing' },
       { text: 'License', link: '/license' },
-      { text: 'GitHub', link: 'https://github.com/user/repo' }
+      { text: 'GitHub', link: 'https://github.com/boxheed/light-di' }
     ],
     sidebar: {
       '/guide/': [

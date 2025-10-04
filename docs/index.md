@@ -11,7 +11,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: View on GitHub
-      link: https://github.com/user/repo
+      link: https://github.com/boxheed/light-di
 
 features:
   - title: "Lightweight & Zero-Dependency"
